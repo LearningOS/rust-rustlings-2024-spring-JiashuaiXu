@@ -1,25 +1,14 @@
-// tests4.rs
+// tests3.rs
 //
-// Make sure that we're testing for the correct conditions!
+// This test isn't testing our function -- make it do that in such a way that
+// the test passes. Then write a second test that tests whether we get the
+// result we expect to get when we call `is_even(5)`.
 //
-// Execute `rustlings hint tests4` or use the `hint` watch subcommand for a
+// Execute `rustlings hint tests3` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
-
-struct Rectangle {
-    width: i32,
-    height: i32
-}
-
-impl Rectangle {
-    // Only change the test functions themselves
-    pub fn new(width: i32, height: i32) -> Self {
-        if width <= 0 || height <= 0 {
-            panic!("Rectangle width and height cannot be negative!")
-        }
-        Rectangle {width, height}
-    }
+pub fn is_even(num: i32) -> bool {
+    num % 2 == 0
 }
 
 #[cfg(test)]
@@ -27,22 +16,12 @@ mod tests {
     use super::*;
 
     #[test]
-    fn correct_width_and_height() {
-        // This test should check if the rectangle is the size that we pass into its constructor
-        let rect = Rectangle::new(10, 20);
-        assert_eq!(???, 10); // check width
-        assert_eq!(???, 20); // check height
+    fn is_true_when_even() {
+        assert!(is_even(2));
     }
 
     #[test]
-    fn negative_width() {
-        // This test should check if program panics when we try to create rectangle with negative width
-        let _rect = Rectangle::new(-10, 10);
-    }
-
-    #[test]
-    fn negative_height() {
-        // This test should check if program panics when we try to create rectangle with negative height
-        let _rect = Rectangle::new(10, -10);
+    fn is_false_when_odd() {
+        assert!(!is_even(1));
     }
 }

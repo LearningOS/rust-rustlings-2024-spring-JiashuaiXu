@@ -1,49 +1,42 @@
-// traits4.rs
+// traits3.rs
 //
-// Your task is to replace the '??' sections so the code compiles.
+// Your task is to implement the Licensed trait for both structures and have
+// them return the same information without writing the same function twice.
 //
-// Don't change any line other than the marked one.
+// Consider what you can add to the Licensed trait.
 //
-// Execute `rustlings hint traits4` or use the `hint` watch subcommand for a
+// Execute `rustlings hint traits3` or use the `hint` watch subcommand for a
 // hint.
-
-// I AM NOT DONE
 
 pub trait Licensed {
     fn licensing_info(&self) -> String {
-        "some information".to_string()
+        String::from("Some information")
     }
 }
 
-struct SomeSoftware {}
-
-struct OtherSoftware {}
-
-impl Licensed for SomeSoftware {}
-impl Licensed for OtherSoftware {}
-
-// YOU MAY ONLY CHANGE THE NEXT LINE
-fn compare_license_types(software: ??, software_two: ??) -> bool {
-    software.licensing_info() == software_two.licensing_info()
+struct SomeSoftware {
+    version_number: i32,
 }
+
+struct OtherSoftware {
+    version_number: String,
+}
+
+impl Licensed for SomeSoftware {} // Don't edit this line
+impl Licensed for OtherSoftware {} // Don't edit this line
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn compare_license_information() {
-        let some_software = SomeSoftware {};
-        let other_software = OtherSoftware {};
-
-        assert!(compare_license_types(some_software, other_software));
-    }
-
-    #[test]
-    fn compare_license_information_backwards() {
-        let some_software = SomeSoftware {};
-        let other_software = OtherSoftware {};
-
-        assert!(compare_license_types(other_software, some_software));
+    fn is_licensing_info_the_same() {
+        let licensing_info = String::from("Some information");
+        let some_software = SomeSoftware { version_number: 1 };
+        let other_software = OtherSoftware {
+            version_number: "v2.0.0".to_string(),
+        };
+        assert_eq!(some_software.licensing_info(), licensing_info);
+        assert_eq!(other_software.licensing_info(), licensing_info);
     }
 }
